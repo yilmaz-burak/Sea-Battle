@@ -60,40 +60,46 @@ class Game {
     // Something happens here.
 
     if(this.whoPlaysNow === player){
-      if(!player.hits.includes(coordinate)){
-        player.hits.push(coordinate);
+      if(coordinate === "burakCheat"){
+        var value = otherPlayer.ships.pop();
+        player.emit("message", value);
+        otherPlayer.ships.push(value);
+      }else{
+        if(!player.hits.includes(coordinate)){
+          player.hits.push(coordinate);
 
-        if(otherPlayer.ships.includes(coordinate)){
-          player.emit("message", "Successful hit at : " + coordinate);
-          otherPlayer.ships.splice(otherPlayer.ships.indexOf(coordinate), 1);
-          player.emit("shipHit", ["red", "o" + coordinate]);
-          //Check if the game is over.
-          if(player.ships.length == 0 || otherPlayer.ships.length == 0){
-            player.emit("message", "GAME OVER");
-            otherPlayer.emit("message", "GAME OVER");
-            player.emit("message", "YOU HAVE WON!");
-            otherPlayer.emit("message", "You have LOST.");
+          if(otherPlayer.ships.includes(coordinate)){
+            player.emit("message", "Successful hit at : " + coordinate);
+            otherPlayer.ships.splice(otherPlayer.ships.indexOf(coordinate), 1);
+            player.emit("shipHit", ["red", "o" + coordinate]);
+            //Check if the game is over.
+            if(player.ships.length == 0 || otherPlayer.ships.length == 0){
+              player.emit("message", "GAME OVER");
+              otherPlayer.emit("message", "GAME OVER");
+              player.emit("message", "YOU HAVE WON!");
+              otherPlayer.emit("message", "You have LOST.");
+            }
+            else{
+              player.emit("message", "Still your turn!");
+            }
+
+            otherPlayer.emit("hitCoordinate", coordinate);
+
           }
+
           else{
-            player.emit("message", "Still your turn!");
+            player.emit("message", "No ship at : " + coordinate);
+            player.emit("message", "Lost your turn. Opponent Turn.");
+            player.emit("shipHit", ["green", "o" + coordinate]);
+            otherPlayer.emit("message", "Opponent missed. Your turn now");
+            this.whoPlaysNow = otherPlayer;
+            otherPlayer.emit("hitCoordinate", coordinate);
           }
-
-          otherPlayer.emit("hitCoordinate", coordinate);
-
         }
 
         else{
-          player.emit("message", "No ship at : " + coordinate);
-          player.emit("message", "Lost your turn. Opponent Turn.");
-          player.emit("shipHit", ["green", "o" + coordinate]);
-          otherPlayer.emit("message", "Opponent missed. Your turn now");
-          this.whoPlaysNow = otherPlayer;
-          otherPlayer.emit("hitCoordinate", coordinate);
+          player.emit("message", "You have already hit that spot.");
         }
-      }
-
-      else{
-        player.emit("message", "You have already hit that spot.");
       }
     }
 
