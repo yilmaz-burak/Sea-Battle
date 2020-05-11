@@ -1,0 +1,44 @@
+body{
+  text-align: center;
+  background-color: #dddddd;
+}
+
+p{
+  margin: auto;
+  border: solid 0px;
+}
+
+td{
+  height: 1.4rem;
+  width: 1.4rem;
+  border: solid;
+  border-style: outset;
+}
+
+table{
+  position: relative;
+  margin: auto;
+  margin-top: 5%;
+}
+
+#chatForm{
+  margin-top: 1%;
+  padding-bottom: 10%;
+}
+
+#myTable{
+  position: fixed;
+  left: 5%;
+}
+
+#opponentTable{
+  position: fixed;
+  right: 5%;
+
+}
+
+#text{
+  margin: auto;
+  padding : 5% 30% 0;
+
+}
