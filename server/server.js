@@ -13,7 +13,7 @@ let waitingPlayer = null;
 
 server.on("error", (err)=>{
   console.error("server error : " + err);
-})
+});
 
 io.on("connection", (socket)=>{
   if(waitingPlayer){

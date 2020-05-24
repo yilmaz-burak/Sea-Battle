@@ -18,7 +18,6 @@ class Game {
     this.players.forEach((player) => {
       player.on("coordinate", (coordinate) => {
         this.addToShips(player, coordinate);
-        console.log(player.ships);
       });
     });
 
