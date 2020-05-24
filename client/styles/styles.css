@@ -11,8 +11,15 @@ p{
 td{
   height: 1.4rem;
   width: 1.4rem;
-  border: solid;
-  border-style: outset;
+  border-style: solid;
+  border-radius: 100%;
+  border-color: #e5e5e5;
+}
+.coordinate{
+  height: 1.4rem;
+  width: 1.4rem;
+  background-color: #dddddd;
+  border-radius: 100%;
 }
 
 table{

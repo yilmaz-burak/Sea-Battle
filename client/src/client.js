@@ -63,3 +63,13 @@ socket.on("shipHit", ([color, coordinate])=>{
 document.getElementById("chatForm").addEventListener("submit", messageSent);
 
 document.getElementById("shipForm").addEventListener("submit", sendShipPlacement);
+
+document.querySelectorAll(".coordinate").forEach((btn)=>{
+  btn.addEventListener("click", ()=>{
+    let coordinate = btn.id;
+    if(coordinate.charAt(0) === 'o'){
+      coordinate = coordinate.substr(1,3);
+    }
+    socket.emit("coordinate", coordinate);
+  })
+})
